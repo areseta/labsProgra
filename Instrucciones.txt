@@ -1,0 +1,40 @@
+instalar MODULOS:
+npm install pg pg-hstore sequelize dotenv-cli
+
+instalar cliente sequelize:
+npm install -g sequelize-cli
+
+inicializar:
+- crear un .sequelizerc.cjs
+- copiar contenido del AV
+- grabar
+- ejecutar: npx sequelize-cli init --options-path .sequelizerc.cjs
+
+*** NOTA: Sequelize usa commonJS y NodejS usa Module
+Se requiere renombrar todo lo de sequelize de .js a .cjs
+
+Poner los parámetros de conexión en el archivo .env
+
+Modificar el archivo db/config/config.cjs según lo que esta en el AV
+
+Crear la base de datos:
+npx sequelize db:create --debug --options-path .sequelizerc.cjs
+
+Crear el modelo:
+npx sequelize model:generate --name user --attributes nombre:string --debug --options-path .sequelizerc.cjs
+
+Se genera el modelo y la migración.
+La migración es el archuvo con la sentencia DDL para generar la tabla en BD
+****Renombrar los archivos de .js a .cjs
+
+CRear la tabla en la BD:
+npx sequelize db:migrate  --debug --options-path .sequelizerc.cjs
+
+Vamos a cargar data en la tabla
+Necesitamos generar un "seeder"
+Copiar los datos del AV
+
+Cargar data con:
+npx sequelize db:seed:all --debug --options-path .sequelizerc.cjs
+
+

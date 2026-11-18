@@ -1,0 +1,5 @@
+Exportar una BD:
+pg_dump -U <tu_usuario> -h localhost -d <nombre_bd> > respaldo.sql
+
+Importar una BD:
+psql -U <tu_usuario> -h localhost -d <nombre_bd> -f respaldo.sql
