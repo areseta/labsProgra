@@ -1,0 +1,18 @@
+[
+    {
+      "nombre": "Durazno",
+      "color": "rojo",
+      "precio": 1.2
+    },
+    {
+      "nombre": "uva",
+      "color": "verde",
+      "precio": 0.5
+    },
+    {
+      "nombre": "Papaya",
+      "color": "verde",
+      "precio": 1.25
+    }
+  ] 
+  

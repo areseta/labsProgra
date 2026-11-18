@@ -1,0 +1,232 @@
+Notas:
+npx sequelize-cli init --options-path .sequelizerc.cjs
+-----------------------------------------------------------------------------
+// .sequelizerc.cjs
+const path = require('path');
+module.exports = {
+  'config': path.resolve('src/db/config', 'config.cjs'),
+  'models-path': path.resolve('src/db', 'models'),
+  'seeders-path': path.resolve('src/db', 'seeders'),
+  'migrations-path': path.resolve('src/db', 'migrations')
+};
+-----------------------------------------------------------------------------
+// db/config/config.cjs
+const dotenv = require("dotenv");
+dotenv.config();
+module.exports = {
+ development: {
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  dialect: "postgres",
+ }, 
+ test: {
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  dialect: "postgres",
+ },
+ production: {
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  dialect: "postgres",
+ },
+};
+-----------------------------------------------------------------------------
+  await queryInterface.bulkInsert('users', [
+   {
+    nombre: 'Pepito',
+    createdAt: new Date(),
+    updatedAt: new Date()
+   },
+   {
+    nombre: 'Anita',
+    createdAt: new Date(),
+    updatedAt: new Date()
+   },
+   {
+    nombre: 'Carlitos',
+    createdAt: new Date(),
+    updatedAt: new Date()
+   }
+  ], {});
+
+
+instalar MODULOS:
+npm install pg pg-hstore sequelize dotenv-cli
+
+instalar cliente sequelize:
+npm install -g sequelize-cli
+
+inicializar:
+- crear un .sequelizerc.cjs
+- copiar contenido del AV
+- grabar
+- ejecutar: npx sequelize-cli init --options-path .sequelizerc.cjs
+
+*** NOTA: Sequelize usa commonJS y NodejS usa Module
+Se requiere renombrar todo lo de sequelize de .js a .cjs
+
+Poner los parámetros de conexión en el archivo .env
+
+Modificar el archivo db/config/config.cjs según lo que esta en el AV
+
+Crear la base de datos:
+npx sequelize db:create --debug --options-path .sequelizerc.cjs
+
+Crear el modelo:
+npx sequelize model:generate --name user --attributes nombre:string --debug --options-path .sequelizerc.cjs
+
+Se genera el modelo y la migración.
+La migración es el archuvo con la sentencia DDL para generar la tabla en BD
+****Renombrar los archivos de .js a .cjs
+
+CRear la tabla en la BD:
+npx sequelize db:migrate  --debug --options-path .sequelizerc.cjs
+
+Vamos a cargar data en la tabla
+Necesitamos generar un "seeder"
+Copiar los datos del AV
+
+Cargar data con:
+npx sequelize db:seed:all --debug --options-path .sequelizerc.cjs
+
+
+
+
+Promesas:
+const promesa = new Promise( (resolve, reject) => {
+
+	reject("Operación con error");
+
+});
+
+
+console.log( promesa );
+
+
+const promesa2 = new Promise( (resolve, reject) => {
+
+	setTimeout( ()=> {
+		resolve("Operación exitosa !");
+	}, 10000 );
+
+});
+
+console.log( "procesando ...." );
+console.log( promesa2 );
+
+
+
+const promesa3 = new Promise( (resolve, reject) => {
+
+	setTimeout( ()=> {
+		resolve("Operación exitosa !");
+	}, 10000 );
+
+});
+
+console.log( "procesando ...." );
+promesa3.then( rpta => {
+		console.log( rpta );
+		return rpta;
+        })
+	.then( data => {
+
+	})
+        .catch ( error => {
+		cosole.log( error )
+        })
+        .finally( ()=> {
+
+	})
+
+
+function obtenerUsuarios() {
+	lst = [ {id: 1, nombre: "Alumno 1"} , {id: 2, nombre: "Alumno 2"} ]
+
+	return new Promise( (resolve) => {
+		setTimeout( ()=> {
+			resolve(lst);
+		}, 10000 );
+	});
+}
+
+
+obtenerUsuarios()
+    .then(  rpta => {
+	console.log( rpta )
+	return rpta[1];
+     })
+    .then(  obj1 => {
+	console.log( obj1 )
+     })
+    . catch( error => {
+	console.log(error);
+    });
+
+
+function obtenerUsuarios2() {
+	lst = [ {id: 1, nombre: "Alumno 1"} , {id: 2, nombre: "Alumno 2"} ]
+
+	return new Promise( (resolve) => {
+		setTimeout( ()=> {
+			resolve(lst);
+		}, 10000 );
+	});
+}
+
+const data = await obtenerUsuarios2();
+console.log(data)
+
+async function obtenerUsuarios3() {
+	lst = [ {id: 1, nombre: "Alumno 1"} , {id: 2, nombre: "Alumno 2"} ]
+
+		setTimeout( ()=> {
+		}, 10000 );
+	
+	return lst;
+}
+
+const data = await obtenerUsuarios3();
+console.log(data)
+
+
+
+Notas lab 12
+1. Abrir Command Prompt
+Posicionarme en la carpeta del laboratorio (carpeta que este usando)
+3. Ingresar
+en el CMD:
+ppm i
+(de non install pe perhstore sequelize doteny-cli)
+apm install
+-g sequelize-cli
+4. Aqui iría lo del punto *2. Configuración Inicial del Proyecto (- sequelizers-sis)"
+5. Aqui se tendría que inicializar especificando la ruta de opciones:
+nex sequelize-cli init -options path • sequelizerc.sis
+Si ya se tiene data dentro, ingresar...
+6. Crear base de datos:
+nox sequelize deicreate acous options-path - sequelizerc.cJ5
+1. Generar el modelo
+pex sequelize modelicreate --name country --attcibutes name string --options= path • sequelizecc.cjs
+2. Generar el modelo: para generar el modelo director con todos sus campos nox sequelize model: create --name director
+--attributes
+first_name:string.last_nameistring.gender:stcing.emailistcing --options-path .sequelizers.cjs
+Eliminar BD (Base de Datos)
+nox sequelize dbidrop --options path -seguelizerc.cjs
+Crear BD
+npx sequelize dbicceate --options.path • sequelizers.cjs
+233
+nox sequelize dimigrate --options-path • sequelizens.cis
+
+
+
+
+curl -X POST  http://localhost:3000/api/v1/users -H "Content-Type: application/json" -d @data.json
+
+
